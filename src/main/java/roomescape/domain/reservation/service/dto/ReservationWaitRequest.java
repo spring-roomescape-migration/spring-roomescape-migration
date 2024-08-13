@@ -12,8 +12,8 @@ public class ReservationWaitRequest {
     @JsonCreator
     public ReservationWaitRequest(
             @JsonProperty("date") String date,
-            @JsonProperty("time") Long timeId,
-            @JsonProperty("theme") Long themeId) {
+            @JsonProperty("timeId") Long timeId,
+            @JsonProperty("themeId") Long themeId) {
         this.date = date;
         this.timeId = timeId;
         this.themeId = themeId;
