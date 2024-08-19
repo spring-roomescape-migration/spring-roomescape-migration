@@ -1,0 +1,21 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo Build Starting on `date`
+      - chmod +x ./gradlew
+      - ./gradlew build
+  post_build:
+    commands:
+      - echo "JAR file name:"
+      - ls -1 build/libs/*.jar | grep -E '\.jar$'
+      - pwd
+artifacts:
+  files:
+    - build/libs/*.jar
+    - appspec.yml
+    - scripts/**
+  discard-paths: yes
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
