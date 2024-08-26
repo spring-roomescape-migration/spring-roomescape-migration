@@ -41,9 +41,9 @@ public class Member {
         this.role = Role.ADMIN.getRole();
     }
 
-    public void connectWith(Reservation reservation) {
+    public void addReservation(Reservation reservation) {
         reservations.add(reservation);
-        reservation.connectWith(this);
+        reservation.addMember(this);
     }
 
     public boolean authenticationCheck(Long memberId) {
@@ -68,5 +68,18 @@ public class Member {
 
     public String getRole() {
         return role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(getId(), member.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
