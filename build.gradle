@@ -36,19 +36,25 @@ test {
     useJUnitPlatform()
 }
 
-jacocoTestReport {
-    dependsOn test
-}
-
 jacoco {
     toolVersion = "0.8.12"
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = false
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+    afterEvaluate {
+        def exclusions = []
+        file("${rootDir}/src/main/java/roomescape/config/jacoco/exclude-coverage.txt").eachLine {
+            exclusions.add(it)
+        }
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: exclusions)
+        }))
     }
 }
