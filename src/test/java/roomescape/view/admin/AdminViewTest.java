@@ -13,6 +13,20 @@ public class AdminViewTest extends AdminViewTestSetting {
     private static final String TOKEN = "token";
 
     @Test
+    void 기본_페이지_요청시_관리자용_시작_페이지를_랜더링한다() {
+
+        //when
+        ExtractableResponse<Response> response = RestAssured.given().log().all()
+                .cookie(TOKEN, 관리자_토큰)
+                .when().get("/")
+                .then().log().all()
+                .extract();
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    @Test
     void 관리자용_예약_관리_페이지를_랜더링한다() {
 
         //when
