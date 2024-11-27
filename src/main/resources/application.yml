@@ -1,21 +1,15 @@
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=MySQL
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: alsdnr12!#
   jpa:
-    defer-datasource-initialization: true
     properties:
       hibernate:
         show-sql: true
         format_sql: true
         highlight_sql: true
-        ddl-auto: create-drop
-  sql:
-    init:
-      mode: always
 logging:
   level:
     org.hibernate.SQL: debug

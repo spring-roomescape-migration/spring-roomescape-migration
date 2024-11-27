@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import roomescape.domain.member.service.MemberService;
 
 import static roomescape.restAssured.MemberRestAssured.로그인_요청;
@@ -11,6 +12,7 @@ import static roomescape.restAssured.MemberRestAssured.회원가입_요청;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class AdminAcceptanceSetting {
 
     private static final String ID = "id";
