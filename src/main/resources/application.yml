@@ -1,9 +1,13 @@
 spring:
+  config:
+    activate:
+      on-profile: prod
+    import: 'aws-parameterstore:/config/roomescape_prod/'
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://${DATABASE_URL}:3306/test?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: alsdnr12!#
+    username: ${DATABASE_USER_NAME}
+    password: ${DATABASE_USER_PASSWORD}
   jpa:
     properties:
       hibernate:
@@ -13,3 +17,9 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+aws:
+  paramstore:
+    enabled: true
+    prefix: /config
+    profile-separator: _
+    name: roomescape
