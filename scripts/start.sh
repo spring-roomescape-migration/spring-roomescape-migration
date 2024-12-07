@@ -29,7 +29,7 @@ fi
 
 DEPLOY_JAR=$DEPLOY_PATH$NEW_JAR_FILE_NAME
 echo "> 배포 작업을 실시합니다." >> $DEPLOY_PATH/deploy.log
-nohup java -jar $DEPLOY_JAR >> $DEPLOY_PATH/deploy.log 2>$DEPLOY_PATH/deploy_err.log &
+nohup java -jar -Dspring.profiles.active=prod $DEPLOY_JAR >> $DEPLOY_PATH/deploy.log 2>$DEPLOY_PATH/deploy_err.log &
 
 CURRENT_PID=$(pgrep -f $NEW_JAR_FILE_NAME)
 echo "> 현재 실행 중인 애플리케이션의 포트는 다음과 같습니다. ==> $CURRENT_PID" >> $DEPLOY_PATH/deploy.log
