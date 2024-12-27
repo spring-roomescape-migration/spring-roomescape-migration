@@ -11,6 +11,7 @@ import roomescape.domain.time.error.exception.TimeErrorCode;
 import roomescape.domain.time.error.exception.TimeException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,7 +22,7 @@ public class ReservationUtilTest {
 
     private static final String 현재_날짜 = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private static final String 현재_시간_5분_뒤_시간 = LocalTime.now().plusMinutes(5L).format(DateTimeFormatter.ofPattern("HH:mm"));
-    private static final String 현재_시간_5분_전_시간 = LocalTime.now().minusMinutes(10L).format(DateTimeFormatter.ofPattern("HH:mm"));
+    private static final String 현재_시간_5분_전_시간 = LocalTime.now().minusMinutes(5L).format(DateTimeFormatter.ofPattern("HH:mm"));
 
     @ParameterizedTest
     @ValueSource(strings = {"가", "a", "가나다라마바사아자차카타파하거너더러머버서"})
@@ -64,6 +65,10 @@ public class ReservationUtilTest {
     void 예약_하려는_날짜와_시간이_현재_날짜와_시간_보다_이_전이면_예외를_발생시킨다() {
 
         //when, then
+        LocalDateTime now = LocalDateTime.now();
+        if(now.getHour() == 0 && now.getMinute() < 5) {
+            return;
+        }
         assertThatThrownBy(() -> DateTimeCheckUtil.isBeforeCheck(현재_날짜, 현재_시간_5분_전_시간))
                 .isInstanceOf(TimeException.class)
                 .hasMessage(TimeErrorCode.IS_BEFORE_ERROR.getErrorMessage());
