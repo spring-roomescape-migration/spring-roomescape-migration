@@ -23,6 +23,6 @@ public class AdminPageController {
 
     @GetMapping("/admin/time")
     public String adminTimePage() {
-        return "/admin/time";
+        return "admin/time";
     }
 }
