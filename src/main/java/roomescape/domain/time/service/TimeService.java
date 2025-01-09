@@ -63,7 +63,7 @@ public class TimeService {
                 .map(time -> new TimeWithStatus(
                         time.getId(),
                         time.getStartAt(),
-                        !reservedTimeId.contains(time.getId()) ? "true" : "false"
+                        reservedTimeId.contains(time.getId()) ? "true" : "false"
                 )).toList();
     }
 
